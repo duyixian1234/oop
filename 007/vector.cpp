@@ -13,8 +13,6 @@ Vector<T>::Vector(int size){
 
 template<class T>
 Vector<T>::~Vector(){
-    cout<<m_nSize<<endl;
-    delete []m_pElements;
 }
 
 template<class T>
@@ -33,10 +31,15 @@ int Vector<T>::inflate(int addSize){
     delete []m_pElements;
     m_pElements=tmp;
     m_nSize+=addSize;
+    return 0;
 }
 
 template<class T>
 T& Vector<T>::operator[](int index){
+    if(index<0||index>m_nSize){
+        IndexOutofBounds e;
+        throw e;
+    }
     return m_pElements[index];
 }
 
